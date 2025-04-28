@@ -1,0 +1,23 @@
+<div class="galeria">
+
+  <div class="producto">
+    <img src="imagenes/vela1.jpg" alt="Bolas pequeñas - Vainilla">
+    <div class="nombre">Cem Flama - Vainilla</div>
+  </div>
+
+  <div class="producto">
+    <img src="imagenes/vela2.jpg" alt="Candelabro - Vainilla">
+    <div class="nombre">Cem Circo - Coco</div>
+  </div>
+
+  <div class="producto">
+    <img src="imagenes/vela3.jpg" alt="Duo - Lavanda">
+    <div class="nombre">Cem Rombo - Lavanda</div>
+  </div>
+
+  <div class="producto">
+    <img src="imagenes/vela4.jpg" alt="Vidrio - Café">
+    <div class="nombre">Cem Parlante - Café</div>
+  </div>
+
+</div>
