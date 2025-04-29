@@ -89,5 +89,24 @@ function showCart() {
 function closeCart() {
   document.getElementById('cart-window').style.display = 'none';
 }
+
+// Abre el modal al hacer clic en una tarjeta
+document.querySelectorAll('.producto').forEach(item => {
+  item.addEventListener('click', () => openModal(item));
+  item.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      openModal(item);
+    }
+  });
+});
+
+// Manejo del favorito (⭐️)
+document.querySelectorAll('.favorito').forEach(star => {
+  star.addEventListener('click', event => {
+    event.stopPropagation();
+    star.classList.toggle('activo');
+  });
+});
 // Inicializar filtrado y contador
 filtrarProductos();
