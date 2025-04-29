@@ -169,9 +169,10 @@
 <body>
   <h1>Catálogo de Velas</h1>
 
-  <div id="cart">
-    🛒 Carrito: <span id="cart-count">0</span> productos - Total: $<span id="cart-total">0</span>
-  </div>
+ <div id="cart">
+  <div>🛒 Carrito: <span id="cart-count">0</span> productos</div>
+  <div>Total: $<span id="cart-total">0</span></div>
+</div>
 
   <div class="buscador">
     <input type="text" id="filtro" placeholder="Buscar por molde o fragancia...">
@@ -211,6 +212,16 @@
       <img src="https://raw.githubusercontent.com/alejordob/catalogo-productos/main/vela3.JPG" alt="vela3">
       <div class="nombre">Duo flama y Circo</div>
       <div class="precio">$45.000</div>
+      <button class="add-to-cart">Agregar al carrito</button>
+      <span class="favorito" onclick="this.classList.toggle('activo')">❤️</span>
+    </div>
+  </div>
+
+    <!-- Producto 4 -->
+    <div class="producto" data-categoria="Lavanda" data-precio="45000">
+      <img src="https://raw.githubusercontent.com/alejordob/catalogo-productos/main/vela4.JPG" alt="vela4">
+      <div class="nombre">Soon</div>
+      <div class="precio">$65.000</div>
       <button class="add-to-cart">Agregar al carrito</button>
       <span class="favorito" onclick="this.classList.toggle('activo')">❤️</span>
     </div>
