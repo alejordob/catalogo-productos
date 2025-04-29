@@ -97,3 +97,10 @@ button {
 button:hover {
   background-color: #2980b9;
 }
+
+/* 8. Contador del carrito */
+#cart-summary {
+  text-align: right;
+  margin: 10px;
+  font-weight: bold;
+}
