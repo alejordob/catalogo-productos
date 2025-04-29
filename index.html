@@ -22,6 +22,7 @@
       justify-content: center;
       margin: 20px auto;
       max-width: 400px;
+      position: relative;
     }
 
     .buscador input {
@@ -33,9 +34,11 @@
     }
 
     .buscador .icono {
-      position: relative;
-      left: -35px;
-      top: 8px;
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 18px;
       color: #888;
     }
 
@@ -144,58 +147,58 @@
   </div>
 
   <div class="botones">
-    <button onclick="filtrarCategoria('vainilla')">Vainilla</button>
-    <button onclick="filtrarCategoria('coco')">Coco</button>
-    <button onclick="filtrarCategoria('lavanda')">Lavanda</button>
+    <button onclick="filtrarCategoria('Vainilla')">Vainilla</button>
+    <button onclick="filtrarCategoria('Coco')">Coco</button>
+    <button onclick="filtrarCategoria('Lavanda')">Lavanda</button>
     <button onclick="filtrarCategoria('')">Ver Todos</button>
   </div>
 
   <p id="contador">Mostrando 0 productos</p>
 
   <div class="galeria" id="galeria">
-    <div class="producto">
+    <div class="producto" data-categoria="Vainilla">
       <img src="https://raw.githubusercontent.com/alejordob/catalogo-productos/main/vela1.JPG" alt="vela1">
       <div class="nombre">Cem Flama - Vainilla</div>
       <span class="favorito" onclick="this.classList.toggle('activo')">❤️</span>
     </div>
 
-    <div class="producto">
+    <div class="producto" data-categoria="Coco">
       <img src="https://raw.githubusercontent.com/alejordob/catalogo-productos/main/vela2.JPG" alt="vela2">
       <div class="nombre">Cem Circo - Coco</div>
       <span class="favorito" onclick="this.classList.toggle('activo')">❤️</span>
     </div>
 
-    <div class="producto">
+    <div class="producto" data-categoria="Lavanda">
       <img src="https://raw.githubusercontent.com/alejordob/catalogo-productos/main/vela3.JPG" alt="vela3">
       <div class="nombre">Cem Rombo - Lavanda</div>
       <span class="favorito" onclick="this.classList.toggle('activo')">❤️</span>
     </div>
 
-    <div class="producto">
+    <div class="producto" data-categoria="Café">
       <img src="https://raw.githubusercontent.com/alejordob/catalogo-productos/main/vela4.JPG" alt="vela4">
       <div class="nombre">Cem Parlante - Café</div>
       <span class="favorito" onclick="this.classList.toggle('activo')">❤️</span>
     </div>
 
-    <div class="producto">
+    <div class="producto" data-categoria="Limón">
       <img src="https://via.placeholder.com/300x200?text=Vela+5" alt="vela5">
       <div class="nombre">Cem Cuadro - Limón</div>
       <span class="favorito" onclick="this.classList.toggle('activo')">❤️</span>
     </div>
 
-    <div class="producto">
+    <div class="producto" data-categoria="Menta">
       <img src="https://via.placeholder.com/300x200?text=Vela+6" alt="vela6">
       <div class="nombre">Cem Esfera - Menta</div>
       <span class="favorito" onclick="this.classList.toggle('activo')">❤️</span>
     </div>
 
-    <div class="producto">
+    <div class="producto" data-categoria="Jazmín">
       <img src="https://via.placeholder.com/300x200?text=Vela+7" alt="vela7">
       <div class="nombre">Cem Hexágono - Jazmín</div>
       <span class="favorito" onclick="this.classList.toggle('activo')">❤️</span>
     </div>
 
-    <div class="producto">
+    <div class="producto" data-categoria="Rosa">
       <img src="https://via.placeholder.com/300x200?text=Vela+8" alt="vela8">
       <div class="nombre">Cem Clásica - Rosa</div>
       <span class="favorito" onclick="this.classList.toggle('activo')">❤️</span>
@@ -228,11 +231,10 @@
     });
 
     function filtrarCategoria(categoria) {
-      const filtro = categoria.toLowerCase();
-      input.value = categoria.charAt(0).toUpperCase() + categoria.slice(1);
+      input.value = categoria;
       productos.forEach(producto => {
         const nombre = producto.querySelector(".nombre").textContent.toLowerCase();
-        producto.style.display = nombre.includes(filtro) ? "block" : "none";
+        producto.style.display = nombre.includes(categoria.toLowerCase()) ? "block" : "none";
       });
       actualizarContador();
     }
@@ -245,7 +247,7 @@
       });
     });
 
-    // Actualizar contador al cargar
+    // Inicializar contador al cargar
     actualizarContador();
   </script>
 </body>
