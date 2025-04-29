@@ -84,23 +84,40 @@ h1 {
   color: gold;
 }
 
-.lightbox {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0,0,0,0.8);
-  display: none;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
+.lightbox .info {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 400px;
+  text-align: center;
+  position: relative;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.3);
 }
 
-.lightbox img {
-  max-width: 90%;
-  max-height: 90%;
-  border-radius: 10px;
+.lightbox .info img {
+  width: 100%;
+  height: auto;
+  margin-bottom: 15px;
+}
+
+.lightbox .info h2 {
+  margin: 0 0 10px;
+  font-size: 1.5em;
+}
+
+.lightbox .info p {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+}
+
+.lightbox .cerrar {
+  position: absolute;
+  top: 5px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  font-size: 1.5em;
+  cursor: pointer;
 }
 
 @media (max-width: 600px) {
