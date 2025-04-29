@@ -63,5 +63,31 @@ lightbox.addEventListener('click', e => {
   }
 });
 
+
+document.getElementById('cart-icon').onclick = showCart;
+
+function showCart() {
+  const itemsList = document.getElementById('cart-items');
+  itemsList.innerHTML = '';
+
+  if (cart.length === 0) {
+    itemsList.innerHTML = '<li>Tu carrito está vacío.</li>';
+  } else {
+    cart.forEach((item, index) => {
+      const li = document.createElement('li');
+      li.innerHTML = `
+        <img src="${item.image}" width="40" style="vertical-align: middle;">
+        <span style="margin-left:10px;">${item.name} - ${item.price}</span>
+      `;
+      itemsList.appendChild(li);
+    });
+  }
+
+  document.getElementById('cart-window').style.display = 'flex';
+}
+
+function closeCart() {
+  document.getElementById('cart-window').style.display = 'none';
+}
 // Inicializar filtrado y contador
 filtrarProductos();
