@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <title>Catálogo de Velas</title>
   <style>
+    /* Tus estilos existentes */
     body {
       font-family: 'Helvetica Neue', Arial, sans-serif;
       background-color: #f9f9f9;
@@ -84,6 +85,8 @@
       overflow: hidden;
       transition: transform 0.3s;
       position: relative;
+      text-align: center;
+      padding: 15px;
     }
 
     .producto:hover {
@@ -98,10 +101,14 @@
     }
 
     .nombre {
-      padding: 15px;
-      text-align: center;
       font-weight: bold;
       color: #555;
+    }
+
+    .precio {
+      color: #888;
+      font-size: 16px;
+      margin-top: 10px;
     }
 
     .favorito {
@@ -116,6 +123,27 @@
 
     .favorito.activo {
       color: red;
+    }
+
+    .add-to-cart {
+      background-color: #6c63ff;
+      color: white;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 20px;
+      cursor: pointer;
+      margin-top: 10px;
+    }
+
+    .add-to-cart:hover {
+      background-color: #5145cd;
+    }
+
+    #cart {
+      font-size: 18px;
+      margin-bottom: 20px;
+      text-align: center;
+      color: #333;
     }
 
     .lightbox {
@@ -141,6 +169,10 @@
 <body>
   <h1>Catálogo de Velas</h1>
 
+  <div id="cart">
+    🛒 Carrito: <span id="cart-count">0</span> productos - Total: $<span id="cart-total">0</span>
+  </div>
+
   <div class="buscador">
     <input type="text" id="filtro" placeholder="Buscar por molde o fragancia...">
     <span class="icono">🔍</span>
@@ -156,53 +188,34 @@
   <p id="contador">Mostrando 0 productos</p>
 
   <div class="galeria" id="galeria">
-    <div class="producto" data-categoria="Vainilla">
+    <!-- Producto 1 -->
+    <div class="producto" data-categoria="Vainilla" data-precio="100">
       <img src="https://raw.githubusercontent.com/alejordob/catalogo-productos/main/vela1.JPG" alt="vela1">
       <div class="nombre">Cem Flama - Vainilla</div>
+      <div class="precio">$100</div>
+      <button class="add-to-cart">Agregar al carrito</button>
       <span class="favorito" onclick="this.classList.toggle('activo')">❤️</span>
     </div>
 
-    <div class="producto" data-categoria="Coco">
+    <!-- Producto 2 -->
+    <div class="producto" data-categoria="Coco" data-precio="120">
       <img src="https://raw.githubusercontent.com/alejordob/catalogo-productos/main/vela2.JPG" alt="vela2">
       <div class="nombre">Cem Circo - Coco</div>
+      <div class="precio">$120</div>
+      <button class="add-to-cart">Agregar al carrito</button>
       <span class="favorito" onclick="this.classList.toggle('activo')">❤️</span>
     </div>
 
-    <div class="producto" data-categoria="Lavanda">
+    <!-- Producto 3 -->
+    <div class="producto" data-categoria="Lavanda" data-precio="140">
       <img src="https://raw.githubusercontent.com/alejordob/catalogo-productos/main/vela3.JPG" alt="vela3">
       <div class="nombre">Cem Rombo - Lavanda</div>
+      <div class="precio">$140</div>
+      <button class="add-to-cart">Agregar al carrito</button>
       <span class="favorito" onclick="this.classList.toggle('activo')">❤️</span>
     </div>
 
-    <div class="producto" data-categoria="Café">
-      <img src="https://raw.githubusercontent.com/alejordob/catalogo-productos/main/vela4.JPG" alt="vela4">
-      <div class="nombre">Cem Parlante - Café</div>
-      <span class="favorito" onclick="this.classList.toggle('activo')">❤️</span>
-    </div>
-
-    <div class="producto" data-categoria="Limón">
-      <img src="https://via.placeholder.com/300x200?text=Vela+5" alt="vela5">
-      <div class="nombre">Cem Cuadro - Limón</div>
-      <span class="favorito" onclick="this.classList.toggle('activo')">❤️</span>
-    </div>
-
-    <div class="producto" data-categoria="Menta">
-      <img src="https://via.placeholder.com/300x200?text=Vela+6" alt="vela6">
-      <div class="nombre">Cem Esfera - Menta</div>
-      <span class="favorito" onclick="this.classList.toggle('activo')">❤️</span>
-    </div>
-
-    <div class="producto" data-categoria="Jazmín">
-      <img src="https://via.placeholder.com/300x200?text=Vela+7" alt="vela7">
-      <div class="nombre">Cem Hexágono - Jazmín</div>
-      <span class="favorito" onclick="this.classList.toggle('activo')">❤️</span>
-    </div>
-
-    <div class="producto" data-categoria="Rosa">
-      <img src="https://via.placeholder.com/300x200?text=Vela+8" alt="vela8">
-      <div class="nombre">Cem Clásica - Rosa</div>
-      <span class="favorito" onclick="this.classList.toggle('activo')">❤️</span>
-    </div>
+    <!-- Más productos... -->
   </div>
 
   <div class="lightbox" id="lightbox" onclick="this.style.display='none'">
@@ -215,6 +228,9 @@
     const contador = document.getElementById("contador");
     const lightbox = document.getElementById("lightbox");
     const lightboxImg = lightbox.querySelector("img");
+
+    let cartCount = 0;
+    let cartTotal = 0;
 
     function actualizarContador() {
       const visibles = document.querySelectorAll(".producto:not([style*='display: none'])").length;
@@ -239,16 +255,21 @@
       actualizarContador();
     }
 
-    productos.forEach(producto => {
-      const img = producto.querySelector("img");
-      img.addEventListener("click", (e) => {
-        lightbox.style.display = "flex";
-        lightboxImg.src = img.src;
+    // Agregar productos al carrito
+    document.querySelectorAll(".add-to-cart").forEach(button => {
+      button.addEventListener("click", (e) => {
+        const producto = e.target.closest(".producto");
+        const precio = parseFloat(producto.getAttribute("data-precio"));
+        
+        cartCount++;
+        cartTotal += precio;
+        
+        document.getElementById("cart-count").textContent = cartCount;
+        document.getElementById("cart-total").textContent = cartTotal.toFixed(2);
       });
     });
 
-    // Inicializar contador al cargar
-    actualizarContador();
-  </script>
-</body>
-</html>
+    productos.forEach(producto => {
+      const img = producto.querySelector("img");
+      img.addEventListener("click", (e) => {
+        light
