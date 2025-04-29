@@ -38,6 +38,26 @@ body {
   border-color: #66afe9;
 }
 
+#cart-window {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1001;
+}
+
+#cart-content {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  width: 300px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
 /* 4. Responsive */
 @media (max-width: 600px) {
   #gallery img {
