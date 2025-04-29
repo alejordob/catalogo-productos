@@ -6,6 +6,9 @@ const gallery = document.getElementById('gallery');
 const lightbox = document.getElementById('lightbox');
 const lightboxImg = lightbox.querySelector('img');
 const contador = document.getElementById('contador');
+let cart = []; // Definición de carrito
+let cartCount = 0;
+let cartTotal = 0;
 
 // Función para cargar imágenes en la galería
 document.getElementById('imageUpload').addEventListener('change', function(event) {
@@ -63,7 +66,6 @@ lightbox.addEventListener('click', e => {
   }
 });
 
-
 document.getElementById('cart-icon').onclick = showCart;
 
 function showCart() {
@@ -90,31 +92,28 @@ function closeCart() {
   document.getElementById('cart-window').style.display = 'none';
 }
 
+// Agregar productos al carrito
+function agregarAlCarrito(producto) {
+  const precio = parseFloat(producto.getAttribute("data-precio"));
+  cart.push({
+    image: producto.querySelector("img").src,
+    name: producto.querySelector(".nombre").textContent,
+    price: precio
+  });
+  cartCount++;
+  cartTotal += precio;
+  document.getElementById("cart-count").textContent = cartCount;
+  document.getElementById("cart-total").textContent = cartTotal.toLocaleString("es-CO");
+}
+
 // Abre el modal al hacer clic en una tarjeta
-
-let cartCount = 0;
-let cartTotal = 0;
-
 document.querySelectorAll(".add-to-cart").forEach(button => {
   button.addEventListener("click", (e) => {
-    e.stopPropagation(); // Para que no se dispare el modal si haces clic en el botón
-
+    e.stopPropagation();
     const producto = e.target.closest(".producto");
-    const precio = parseInt(producto.getAttribute("data-precio"));
-    
-    cartCount++;
-    cartTotal += precio;
-
-    document.getElementById("cart-count").textContent = cartCount;
-    document.getElementById("cart-total").textContent = cartTotal.toLocaleString("es-CO");
+    agregarAlCarrito(producto);
   });
 });
 
-function openModal(element) {
-  const imageSrc = element.querySelector("img").src;
-  lightboxImg.src = imageSrc;
-  lightbox.style.display = "flex";
-}
 // Inicializar filtrado y contador
 filtrarProductos();
-actualizarContador();
