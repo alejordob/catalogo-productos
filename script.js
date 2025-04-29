@@ -91,21 +91,22 @@ function closeCart() {
 }
 
 // Abre el modal al hacer clic en una tarjeta
-document.querySelectorAll('.producto').forEach(item => {
-  item.addEventListener('click', () => openModal(item));
-  item.addEventListener('keydown', e => {
-    if (e.key === 'Enter' || e.key === ' ') {
-      e.preventDefault();
-      openModal(item);
-    }
-  });
-});
 
-// Manejo del favorito (⭐️)
-document.querySelectorAll('.favorito').forEach(star => {
-  star.addEventListener('click', event => {
-    event.stopPropagation();
-    star.classList.toggle('activo');
+let cartCount = 0;
+let cartTotal = 0;
+
+document.querySelectorAll(".add-to-cart").forEach(button => {
+  button.addEventListener("click", (e) => {
+    e.stopPropagation(); // Para que no se dispare el modal si haces clic en el botón
+
+    const producto = e.target.closest(".producto");
+    const precio = parseInt(producto.getAttribute("data-precio"));
+    
+    cartCount++;
+    cartTotal += precio;
+
+    document.getElementById("cart-count").textContent = cartCount;
+    document.getElementById("cart-total").textContent = cartTotal.toLocaleString("es-CO");
   });
 });
 // Inicializar filtrado y contador
