@@ -29,6 +29,47 @@ function openModal(element) {
   lightbox.style.display = "flex";
 }
 
+document.addEventListener("DOMContentLoaded", function () {
+  const productos = document.querySelectorAll('.producto');
+  const lightbox = document.getElementById('lightbox');
+  const lightboxImg = document.getElementById('lightbox-img');
+  const lightboxNombre = document.getElementById('lightbox-nombre');
+  const lightboxPrecio = document.getElementById('lightbox-precio');
+  const cerrarBtn = document.getElementById('cerrar-lightbox');
+
+  productos.forEach(producto => {
+    const img = producto.querySelector('img');
+    const btnAgregar = producto.querySelector('.agregar-carrito');
+
+    img.addEventListener('click', () => {
+      const nombre = producto.dataset.nombre;
+      const precio = producto.dataset.precio;
+      const imagen = producto.dataset.imagen;
+
+      lightboxImg.src = imagen;
+      lightboxNombre.textContent = nombre;
+      lightboxPrecio.textContent = precio;
+
+      lightbox.style.display = 'flex';
+    });
+
+    btnAgregar.addEventListener('click', () => {
+      alert(`Agregado al carrito: ${producto.dataset.nombre}`);
+      // Aquí podrías agregar lógica real de carrito
+    });
+  });
+
+  cerrarBtn.addEventListener('click', () => {
+    lightbox.style.display = 'none';
+  });
+
+  lightbox.addEventListener('click', (e) => {
+    if (e.target === lightbox) {
+      lightbox.style.display = 'none';
+    }
+  });
+});
+
 // Cerrar lightbox al hacer clic fuera de la imagen
 lightbox.addEventListener('click', e => {
   if (e.target !== lightboxImg) {
