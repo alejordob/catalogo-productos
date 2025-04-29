@@ -117,3 +117,4 @@ function openModal(element) {
 }
 // Inicializar filtrado y contador
 filtrarProductos();
+actualizarContador();
