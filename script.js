@@ -109,5 +109,11 @@ document.querySelectorAll(".add-to-cart").forEach(button => {
     document.getElementById("cart-total").textContent = cartTotal.toLocaleString("es-CO");
   });
 });
+
+function openModal(element) {
+  const imageSrc = element.querySelector("img").src;
+  lightboxImg.src = imageSrc;
+  lightbox.style.display = "flex";
+}
 // Inicializar filtrado y contador
 filtrarProductos();
