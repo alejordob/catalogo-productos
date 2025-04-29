@@ -10,18 +10,43 @@
       margin: 0;
       padding: 20px;
     }
+
     h1 {
       text-align: center;
       color: #333;
-      margin-bottom: 30px;
+      margin-bottom: 10px;
     }
+
+    .buscador {
+      display: flex;
+      justify-content: center;
+      margin: 20px auto;
+      max-width: 400px;
+    }
+
+    .buscador input {
+      width: 100%;
+      padding: 10px 40px 10px 15px;
+      border-radius: 20px;
+      border: 1px solid #ccc;
+      font-size: 16px;
+    }
+
+    .buscador .icono {
+      position: relative;
+      left: -35px;
+      top: 8px;
+      color: #888;
+    }
+
     .galeria {
       display: grid;
-      grid-template-columns: repeat(4, 1fr); /* 4 columnas */
+      grid-template-columns: repeat(4, 1fr);
       gap: 20px;
       max-width: 1200px;
       margin: 0 auto;
     }
+
     .producto {
       background: white;
       border-radius: 10px;
@@ -29,14 +54,17 @@
       overflow: hidden;
       transition: transform 0.3s;
     }
+
     .producto:hover {
       transform: scale(1.05);
     }
+
     .producto img {
       width: 100%;
       height: 200px;
       object-fit: cover;
     }
+
     .nombre {
       padding: 15px;
       text-align: center;
@@ -49,27 +77,61 @@
 
 <h1>Catálogo de Velas</h1>
 
-<div class="galeria">
+<div class="buscador">
+  <input type="text" id="filtro" placeholder="Buscar por molde o fragancia...">
+  <span class="icono">🔍</span>
+</div>
+
+<div class="galeria" id="galeria">
+  <!-- Repite este bloque con diferentes imágenes y nombres -->
   <div class="producto">
-    <img src="https://raw.githubusercontent.com/alejordob/catalogo-productos/main/vela1.JPG" alt="Vela 1">
-    <div class="nombre">Molde bolitas - Vainilla </div>
+    <img src="https://raw.githubusercontent.com/alejordob/catalogo-productos/main/vela1.JPG" alt="vela1">
+    <div class="nombre">Cem Flama - Vainilla</div>
+  </div>
+  <div class="producto">
+    <img src="https://raw.githubusercontent.com/alejordob/catalogo-productos/main/vela2.JPG" alt="vela2">
+    <div class="nombre">Cem Circo - Coco</div>
+  </div>
+  <div class="producto">
+    <img src="https://raw.githubusercontent.com/alejordob/catalogo-productos/main/vela3.JPG" alt="vela3">
+    <div class="nombre">Cem Rombo - Lavanda</div>
+  </div>
+  <div class="producto">
+    <img src="https://raw.githubusercontent.com/alejordob/catalogo-productos/main/vela4.JPG" alt="vela4">
+    <div class="nombre">Cem Parlante - Café</div>
   </div>
 
+  <!-- Más productos -->
   <div class="producto">
-    <img src="https://raw.githubusercontent.com/alejordob/catalogo-productos/main/vela2.JPG" alt="Vela 2">
-    <div class="nombre"> Portavela - Vainilla </div>
+    <img src="https://via.placeholder.com/300x200?text=Vela+5" alt="vela5">
+    <div class="nombre">Cem Cuadro - Limón</div>
   </div>
-
   <div class="producto">
-    <img src="https://raw.githubusercontent.com/alejordob/catalogo-productos/main/vela3.JPG" alt="Vela 3">
-    <div class="nombre"> Flama & circo citronela y coco </div>
+    <img src="https://via.placeholder.com/300x200?text=Vela+6" alt="vela6">
+    <div class="nombre">Cem Esfera - Menta</div>
   </div>
-
   <div class="producto">
-    <img src="https://raw.githubusercontent.com/alejordob/catalogo-productos/main/vela4.JPG" alt="Vela 4">
-    <div class="nombre"> Parlante - citronela </div>
+    <img src="https://via.placeholder.com/300x200?text=Vela+7" alt="vela7">
+    <div class="nombre">Cem Hexágono - Jazmín</div>
+  </div>
+  <div class="producto">
+    <img src="https://via.placeholder.com/300x200?text=Vela+8" alt="vela8">
+    <div class="nombre">Cem Clásica - Rosa</div>
   </div>
 </div>
+
+<script>
+  const input = document.getElementById("filtro");
+  const productos = document.querySelectorAll(".producto");
+
+  input.addEventListener("input", () => {
+    const filtro = input.value.toLowerCase();
+    productos.forEach(producto => {
+      const nombre = producto.querySelector(".nombre").textContent.toLowerCase();
+      producto.style.display = nombre.includes(filtro) ? "block" : "none";
+    });
+  });
+</script>
 
 </body>
 </html>
