@@ -1,5 +1,6 @@
+/* 1. Fuente limpia y fondo visual */
 body {
-  font-family: Arial, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   margin: 20px;
   background: repeating-linear-gradient(
     45deg,
@@ -11,6 +12,7 @@ body {
   color: #333;
 }
 
+/* 2. Galería de imágenes */
 #gallery {
   display: flex;
   flex-wrap: wrap;
@@ -19,6 +21,7 @@ body {
   justify-content: center;
 }
 
+/* 3. Imágenes con efecto y diseño */
 #gallery img {
   width: 200px;
   height: 200px;
@@ -35,9 +38,42 @@ body {
   border-color: #66afe9;
 }
 
+/* 4. Responsive */
 @media (max-width: 600px) {
   #gallery img {
     width: 100%;
     height: auto;
   }
+}
+
+/* 5. Encabezado atractivo */
+h1 {
+  text-align: center;
+  font-size: 2.5em;
+  margin-bottom: 20px;
+  color: #2c3e50;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.1);
+}
+
+/* 6. Contenedor principal centrado */
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+/* 7. Botón (si lo usas más adelante) */
+button {
+  background-color: #3498db;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  font-size: 1em;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #2980b9;
 }
