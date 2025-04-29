@@ -1,59 +1,65 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Galería y Carrito</title>
-  <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Catálogo de Velas</title>
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
   <div class="container">
-    <h1>Galería de Productos</h1>
-
-    <!-- Contenedor de filtro -->
-    <input type="text" id="input" placeholder="Buscar productos..." />
-
-    <div id="productosContainer">
-      <!-- Productos (agregados dinámicamente) -->
-      <div class="producto" data-precio="25000">
-        <img src="vela1.JPG" alt="Producto 1">
-        <div class="nombre">Producto 1</div>
-        <button class="add-to-cart">Agregar al carrito</button>
-      </div>
-      <div class="producto" data-precio="15000">
-        <img src="https://via.placeholder.com/200" alt="Producto 2">
-        <div class="nombre">Producto 2</div>
-        <button class="add-to-cart">Agregar al carrito</button>
-      </div>
-      <!-- Otros productos aquí -->
-    </div>
-
-    <!-- Contador de productos filtrados -->
+    <h1>Catálogo de Velas</h1>
+    <input type="text" id="input" placeholder="Buscar producto..." />
     <div id="contador"></div>
-
-    <!-- Carrito -->
-    <div id="cart-summary">
-      🛒 <span id="cart-count">0</span> productos | Total: $<span id="cart-total">0</span>
-    </div>
-
-    <!-- Lightbox (modal de imagen) -->
-    <div id="lightbox" style="display:none;">
-      <img src="" alt="Imagen grande">
-    </div>
-
-    <!-- Carga de imágenes -->
-    <input type="file" id="imageUpload" multiple>
-    <div id="gallery"></div>
-
-    <!-- Carrito (ventana emergente) -->
-    <div id="cart-window" style="display:none;">
-      <div id="cart-content">
-        <ul id="cart-items">
-          <li>Tu carrito está vacío.</li>
-        </ul>
-        <button onclick="closeCart()">Cerrar</button>
+    <div class="galeria" id="galeria">
+      <!-- Producto 1 -->
+      <div class="producto" onclick="openModal(this)" data-name="Bolitas - Vainilla" data-price="$10.000" data-description="Vela con aroma a vainilla." data-image="https://raw.githubusercontent.com/alejordob/catalogo-productos/main/vela1.JPG">
+        <img src="https://raw.githubusercontent.com/alejordob/catalogo-productos/main/vela1.JPG" alt="vela1">
+        <div class="nombre">Bolitas - Vainilla</div>
+        <div class="precio">$10.000</div>
+        <span class="favorito" onclick="event.stopPropagation(); this.classList.toggle('activo')">⭐️</span>
+      </div>
+      <!-- Producto 2 -->
+      <div class="producto" onclick="openModal(this)" data-name="Portavela - Coco" data-price="$10.000" data-description="Vela con aroma a coco." data-image="https://raw.githubusercontent.com/alejordob/catalogo-productos/main/vela2.JPG">
+        <img src="https://raw.githubusercontent.com/alejordob/catalogo-productos/main/vela2.JPG" alt="vela2">
+        <div class="nombre">Portavela - Coco</div>
+        <div class="precio">$10.000</div>
+        <span class="favorito" onclick="event.stopPropagation(); this.classList.toggle('activo')">⭐️</span>
+      </div>
+      <!-- Producto 3 -->
+      <div class="producto" onclick="openModal(this)" data-name="Duo flama y Circo" data-price="$45.000" data-description="Set de velas aromáticas." data-image="https://raw.githubusercontent.com/alejordob/catalogo-productos/main/vela3.JPG">
+        <img src="https://raw.githubusercontent.com/alejordob/catalogo-productos/main/vela3.JPG" alt="vela3">
+        <div class="nombre">Duo flama y Circo</div>
+        <div class="precio">$45.000</div>
+        <span class="favorito" onclick="event.stopPropagation(); this.classList.toggle('activo')">⭐️</span>
+      </div>
+      <!-- Producto 4 -->
+      <div class="producto" onclick="openModal(this)" data-name="Soon" data-price="$65.000" data-description="Vela decorativa." data-image="https://raw.githubusercontent.com/alejordob/catalogo-productos/main/vela4.JPG">
+        <img src="https://raw.githubusercontent.com/alejordob/catalogo-productos/main/vela4.JPG" alt="vela4">
+        <div class="nombre">Soon</div>
+        <div class="precio">$65.000</div>
+        <span class="favorito" onclick="event.stopPropagation(); this.classList.toggle('activo')">⭐️</span>
+      </div>
+      <!-- Producto 5 -->
+      <div class="producto" onclick="openModal(this)" data-name="Duo flama y Circo" data-price="$45.000" data-description="Set de velas aromáticas." data-image="https://raw.githubusercontent.com/alejordob/catalogo-productos/main/vela5.JPG">
+        <img src="https://raw.githubusercontent.com/alejordob/catalogo-productos/main/vela5.JPG" alt="vela5">
+        <div class="nombre">Duo flama y Circo</div>
+        <div class="precio">$45.000</div>
+        <span class="favorito" onclick="event.stopPropagation(); this.classList.toggle('activo')">⭐️</span>
+      </div>
+      <!-- Producto 6 -->
+      <div class="producto" onclick="openModal(this)" data-name="Soon" data-price="$65.000" data-description="Vela decorativa." data-image="https://raw.githubusercontent.com/alejordob/catalogo-productos/main/vela6.JPG">
+        <img src="https://raw.githubusercontent.com/alejordob/catalogo-productos/main/vela6.JPG" alt="vela6">
+        <div class="nombre">Soon</div>
+        <div class="precio">$65.000</div>
+        <span class="favorito" onclick="event.stopPropagation(); this.classList.toggle('activo')">⭐️</span>
       </div>
     </div>
+  </div>
+
+  <!-- Lightbox -->
+  <div id="lightbox" class="lightbox">
+    <img src="" alt="Imagen ampliada" />
   </div>
 
   <script src="script.js"></script>
